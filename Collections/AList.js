@@ -93,6 +93,14 @@ AList.prototype.toArray = function(){
     }
     return arr
 }
+AList.prototype.toString = function(){
+    var arr = this.toArray()
+    var res = ''
+    for(var i = 0; i < arr.length; i++){
+        res += arr[i]
+    }
+    return res
+}
 AList.prototype.clear = function (){
     this.array = new Array (this.DEFAULT_CAPACITY)
     this.size = 0
@@ -151,5 +159,78 @@ AList.prototype.reverse = function(){
         reversedArray[i] = this.array[this.array.length - i - 1]
     }
     this.array = reversedArray
+}
+AList.prototype.halfReverse = function(){
+   var arr = this.toArray()
+    if(arr.length % 2 === 0 ){
+        var swapArray = []
+	var i2 = (arr.length / 2) ;
+	
+	for (var i = 0; i < arr.length; i++){
+		if (i < i2){
+		swapArray[(arr.length/2)+ i ] = arr[i]
+	}
+	
+		else {
+			swapArray[ i-(arr.length/2) ] = arr[i]
+		}
+	}
+    this.array = swapArray
+    }else {
+        var midIndex = Math.floor(arr.length / 2)
+        var mid = arr[midIndex]
+        var swapArray = new Array(arr.length)
+        for(var i = 0; i < midIndex; i++){
+                swapArray[midIndex + 1 + i] = arr[i]
+        }
+        for(var i = arr.length; i > midIndex; i--){
+            swapArray[i - midIndex - 1] = arr[i]
+        }
+        swapArray[midIndex] = mid
+        this.array = swapArray
+    }
+}
+// AList.prototype.retainAll = function(array){
+//     if(Array.isArray(array)){
+//         var initArr = this.toArray()
+//         for(var i = 0; i < initArr.length; i++){
+
+//         }
+//     }else return 'put array in agruments'
+// }
+// AList.prototype.removeAll = function(array){
+//     if(Array.isArray(array)){
+//         var initArr = this.toArray()
+//         for(var i = 0; i < initArr.length; i++){
+
+//         }
+//     }else return 'put array in agruments'
+// }
+
+AList.prototype.sort = function(){
+    var array = this.toArray()
+    var res = quickSort(array)
+    function quickSort(arr) {
+        if (arr.length < 2) return arr;
+        let pivot = arr[0];
+        const left = [];
+        const right = [];
+          
+        for (let i = 1; i < arr.length; i++) {
+          if (pivot > arr[i]) {
+            left.push(arr[i]);
+          } else {
+            right.push(arr[i]);
+          }
+        }
+        return quickSort(left).concat(pivot, quickSort(right));
+      }
+      return res
+}
+AList.prototype.print = function(){
+    var res = this.toArray()
+    for(var i = 0; i < res.length; i++){
+        console.log(res[i]);
+    }
 }
 module.exports = AList;

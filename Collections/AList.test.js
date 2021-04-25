@@ -137,6 +137,18 @@ describe("AList toArray", function () {
         expect(list.toArray()).toEqual(expected)
     });
 })
+describe("AList toString", function () {
+    it("work with even collection", function () {
+        var list = new AList()
+        list.add(1)
+        list.add(2)
+        list.add(3)
+        list.add(4)
+        list.toString()
+        // list.toArray() = jest.fn()
+        expect(typeof list.toString()).toBe('string')
+    });
+})
 describe("AList clear", function () {
     it("remove all values, set size to 0 and capacity to default ", function () {
         var ARRAY = [1, -2, 3, undefined , -60, 90];
@@ -216,5 +228,94 @@ describe("AList reverse", function () {
         // console.log(list.array);
         var expected = [undefined, undefined, 42, undefined, undefined, 7,4, 3, 2, 1]
         expect(list.array).toEqual(expected)
+    });
+})
+describe("AList halfReverse", function () {
+    it("work with even collection", function () {
+        var list = new AList()
+        list.add(1)
+        list.add(2)
+        list.add(3)
+        list.add(4)
+        var expected = [3, 4, 1, 2]
+        list.halfReverse()
+        expect(list.array).toEqual(expected)
+    });
+    it("work with odd collection", function () {
+        var list = new AList()
+        list.add(1)
+        list.add(2)
+        list.add(3)
+        list.add(4)
+        list.add(5)
+        var expected = [4, 5, 3, 1, 2]
+        list.halfReverse()
+        expect(list.array).toEqual(expected)
+    });
+    it("work with even collections and trim all undefined cells", function () {
+        var list = new AList()
+        list.add(1)
+        list.add(2)
+        list.add(3)
+        list.set(4, 8)
+        var expected = [3, 4, 1, 2]
+        list.halfReverse()
+        expect(list.array).toEqual(expected)
+    });
+    it("work with odd collection and trim undefined cells", function () {
+        var list = new AList()
+        list.add(1)
+        list.add(2)
+        list.add(3)
+        list.add(4)
+        list.set(5, 8)
+        var expected = [4, 5, 3, 1, 2]
+        list.halfReverse()
+        expect(list.array).toEqual(expected)
+    });
+})
+// describe("AList retainAll", function () {
+//     it("do not work without array in arg", function () {
+//         var list = new AList()
+//         list.add(1)
+//         list.add(2)
+//         list.add(3)
+//         list.add(4)
+//         var expected = [3, 4, 1, 2]
+//         list.halfReverse()
+//         expect(list.array).toEqual(expected)
+//     });
+// })
+// describe("AList removeAll", function () {
+//     it("do not work without array in arg", function () {
+//         var list = new AList()
+//         list.add(1)
+//         list.add(2)
+//         list.add(3)
+//         list.add(4)
+//         var expected = [3, 4, 1, 2]
+//         list.halfReverse()
+//         expect(list.array).toEqual(expected)
+//     });
+// })
+describe("AList sort", function () {
+    it("do not work without array in arg", function () {
+        var list = new AList()
+        list.add(1)
+        list.add(4)
+        list.add(3)
+        list.add(2)
+        var expected = [1, 2, 3, 4]
+        expect(list.sort()).toEqual(expected)
+    });
+})
+describe("AList print", function () {
+    it("work", function () {
+        var list = new AList()
+        list.add(1)
+        list.add(4)
+        list.add(3)
+        list.add(2)
+        list.print()
     });
 })
