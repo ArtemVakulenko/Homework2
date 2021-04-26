@@ -18,7 +18,6 @@ describe("AList check init capacity", function () {
         expect(list.array.length).toBe(ARRAY.length);
     });
 });
-
 describe("AList add", function () {
     it("add first", function () {
         var list = new AList();
@@ -41,7 +40,6 @@ describe("AList add", function () {
         expect(list.getSize()).toBe(11)
     });
 });
-
 describe("AList set", function () {
     it("set into undefined", function () {
         var list = new AList();
@@ -82,7 +80,6 @@ describe("AList set", function () {
         expect(list.set(42, 25)).toBe("Array Index Is Out Of Bounds")
     });
 });
-
 describe("AList get", function () {
     it("get from existing value", function () {
         var ARRAY = [1, -2, 3, undefined , -60, 90];
@@ -107,7 +104,6 @@ describe("AList get", function () {
        expect(list.get(25)).toBe("index is out of bounds")
     });
 })
-
 describe("AList remove", function () {
     it("remove existing value ", function () {
         var ARRAY = [1, -2, 3, 42 , -60, 90];

@@ -15,16 +15,13 @@ LList.prototype.clear = function () {
     this.size = 0;
     this.root = null;
 };
-
 LList.prototype.getSize = function () {
     return this.size;
 };
-
 LList.prototype.add = function (value) {
     var newNode = new this.Node(value);
     this.size++;
     if (this.root === null) {
-        // newNode.next = this.root;
         this.root = newNode;
     } else {
         var tempNode = this.root;
@@ -34,7 +31,6 @@ LList.prototype.add = function (value) {
         tempNode.next = newNode;
     }
 };
-
 LList.prototype.toArray = function () {
     var array = new Array(this.size);
     var index = 0;
@@ -45,7 +41,6 @@ LList.prototype.toArray = function () {
     }
     return array;
 };
-
 LList.prototype.remove = function (value) {
     if (this.root === null) {
         return;
@@ -67,5 +62,23 @@ LList.prototype.remove = function (value) {
         }
     }
 };
-
+LList.prototype.set = function (value, index){
+    var newNode = this.Node(value)
+    if(index = 0){
+        return this.root = newNode
+    }
+    if(index > this.size){
+        return 'NO'
+    }
+    var indexCount = 0
+    var currentNode = this.root
+    while(currentNode.next !== null){
+        currentNode = currentNode.next
+        indexCount++
+        if(indexCount === index){
+            currentNode = newNode
+            break
+        }
+    }
+}
 module.exports = LList;
