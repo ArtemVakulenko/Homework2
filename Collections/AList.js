@@ -77,7 +77,9 @@ AList.prototype.remove = function (value){
         for(var i = 0; i < this.array.length; i++){
             if (this.array[i] === value){
                 this.size--
+                var removedValue = this.array[i]
                 this.array[i] = undefined
+                return removedValue
             }else return "there is no value in array"
         }
     }else return "specify value"
