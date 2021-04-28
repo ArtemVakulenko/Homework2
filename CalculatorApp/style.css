@@ -1,0 +1,13 @@
+
+.mathButton{
+    color: red;
+}
+.numButton{
+    color: green;
+}
+.signButton{
+    color: blue;
+}
+.hide{
+    display: none;
+}

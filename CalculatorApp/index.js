@@ -16,9 +16,20 @@ var btnPLUS = document.getElementById('PLUS');
 var btnZERO = document.getElementById('ZERO');
 var btnPOINT = document.getElementById('POINT');
 var btnEQUALS = document.getElementById('EQUALS');
+var btnENG = document.getElementById('ENG');
+var engPanel = document.querySelector('.engPanel');
+var btnOPENBRACKET = document.getElementById('OPENBRACKET');
+var btnCLOSEDBRACKET = document.getElementById('CLOSEDBRACKET');
 var res = ''
 
 btnC.addEventListener('click', clearFunc)
+btnENG.addEventListener('click', toggleEngPanel)
+btnCLOSEDBRACKET.addEventListener('click', function(){
+    add(')')
+})
+btnOPENBRACKET.addEventListener('click', function(){
+    add('(')
+})
 btnDIVIDE.addEventListener('click', function(){
     add('/')
 })
@@ -77,10 +88,11 @@ function clearFunc (){
 function add (str){
     screen.value += str
     res += str
-    console.log(res);
-    console.log(typeof res);
 }
 function evaluate(){
     var ans = eval(res)
     screen.value = ans
+}
+function toggleEngPanel(){
+    engPanel.classList.toggle('hide')
 }
