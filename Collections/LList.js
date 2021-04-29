@@ -64,8 +64,9 @@ LList.prototype.remove = function (value) {
 };
 LList.prototype.set = function (value, index){
     var newNode = this.Node(value)
-    if(index = 0){
-        return this.root = newNode
+    if(index === 0){
+        this.root = newNode
+        return
     }
     if(index > this.size){
         return 'NO'

@@ -1,0 +1,88 @@
+СОЗДАЕМ ТАБЛИЦУ STREETS С ПОЛЯМИ СОГЛАСНО ТЗ
+
+CREATE TABLE Streets (
+    StreetID INT PRIMARY KEY AUTO_INCREMENT ,
+    streetName VARCHAR (50)
+);
+
+СОЗДАЕМ ТАБЛИЦУ PEOPLE С ПОЛЯМИ СОГЛАСНО ТЗ
+
+CREATE TABLE People (
+    PersonId INT PRIMARY KEY AUTO_INCREMENT,
+    FirstName VARCHAR (50),
+    LastName VARCHAR (50),
+    Age INT,
+    Id_Street INT,
+    FOREIGN KEY (Id_Street) REFERENCES Streets (StreetID)
+);
+
+ПРИДУМЫВАЕМ НАЗВНИЯ УЛИЦАМ. ИЗ НИХ ОДНА УЛИЦА ПРАВДЫ И ДВЕ УЛИЦЫ У КОТОРЫХ НАЗВАНИЕ ДЛИНОЙ 6 БУКВ 
+
+INSERT INTO Streets (streetName) VALUES ('Апельсиновая');
+INSERT INTO Streets (streetName) VALUES ('Яблочная');
+INSERT INTO Streets (streetName) VALUES ('Сливовая');
+INSERT INTO Streets (streetName) VALUES ('Веселая');
+INSERT INTO Streets (streetName) VALUES ('ШестьБ');
+INSERT INTO Streets (streetName) VALUES ('Правды');
+
+ПРИДУМЫВАЕМ ЛЮДЕЙ, ВСЕГО 16, ИЗ НИХ ДВОЕ БЕЗ УЛИЦЫ, ТРОЕ С ФАМИЛИЯМИ, КОТОРЫЕ СОДЕРЖАТ БУКВЫ Б ВНУТРИ.
+
+
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Вася', 'Пупкин', '34', NULL);
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Пупка', 'Васин', '33', NULL);
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Иван', 'Иванов', '32', '1');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Петр', 'Петров', '32', '1');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Петр', 'Иванов', '32', '2');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Иван', 'Петров', '32', '2');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Бобр', 'Бобров', '32', '3');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Бобер', 'Бобров', '32', '3');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Барак', 'Обама', '1', '4');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Дональд', 'Трамп', '32', '4');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Джо', 'Байден', '27', '5');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Володя', 'Зеленский', '41', '5');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Билл', 'Гейтс', '36', '6');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Илон', 'Маск', '3', '6');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Джон', 'Джонович', '16', '6');
+INSERT INTO People ( FirstName, LastName, Age, Id_Street ) VALUES ('Василий', 'Васильев', '17', '6');
+
+
+ПИШЕМ ЗАПРОСЫ В БД СОГЛАСНО ТЗ
+
+1.	Вывести общее число жителей
+SELECT COUNT(*) FROM PEOPLE ;
+
+2.	Вывести средний возраст жителей
+SELECT AVG(PersonAge) FROM PEOPLE;
+
+3.  Вывести отсортированный по алфавиту список фамилий без повторений
+SELECT DISTINCT LastName FROM PEOPLE ORDER BY LastName ;
+
+4.	Вывести список фамилий, с указанием количества повторений этих фамилий в общем списке
+SELECT LastName, COUNT(*) FROM PEOPLE GROUP BY LastName ;
+
+5.	Вывести фамилии, которые содержат в середине букву «б»
+SELECT LastName FROM PEOPLE WHERE LastName LIKE '_%б%_';
+
+6.  Вывести список «бомжей»
+SELECT * FROM PEOPLE WHERE Id_Street IS NULL ;
+
+7.	Вывести список несовершеннолетних, проживающих на проспекте Правды
+SELECT PEOPLE.* FROM PEOPLE
+JOIN Streets ON People.Id_Street = Streets.StreetID
+WHERE Streets.streetName LIKE '%Правды%' AND People.Age < 18 ;
+
+8.  Вывести упорядоченный по алфавиту список всех улиц с указанием, сколько жильцов живёт на улице
+SELECT Streets.streetId, Streets.streetName, COUNT(People.personID) 
+FROM Streets 
+JOIN People ON Streets.streetId = People.Id_Street 
+GROUP BY Streets.streetId, Streets.streetName
+
+9.  Вывести список улиц, название которых состоит из 6-ти букв 
+SELECT * FROM Streets WHERE LENGTH(streetName) = 6 ;
+
+10. Вывести список улиц с количеством жильцов на них меньше 3.
+SELECT Streets.StreetID, Streets.streetName 
+FROM Streets 
+JOIN People ON Streets.StreetID = People.Id_Street
+GROUP BY Streets.StreetID, Streets.streetName
+HAVING COUNT(People.PersonId) < 3 ;
