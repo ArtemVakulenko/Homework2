@@ -198,6 +198,18 @@ describe("AList maxValue", function () {
         expect(list.maxValue()).toBe(90)
     });
 })
+// describe("AList maxIndex", function () {
+//     it("return max index if such is present", function () {
+//         var ARRAY = [1, -2, 3, 52 , -60, 90, 42];
+//         var list = new AList(ARRAY);
+//         expect(list.minIndex()).toBe(5)
+//     });
+//     it("return first max Index if such is present twice", function () {
+//         var ARRAY = [1, -2, 3, 52, 90, -60, 90, -60, 42];
+//         var list = new AList(ARRAY);
+//         expect(list.minIndex()).toBe(4)
+//     });
+// })
 describe("AList minIndex", function () {
     it("return min index if such is present", function () {
         var ARRAY = [1, -2, 3, 52 , -60, 90, 42];
@@ -270,32 +282,32 @@ describe("AList halfReverse", function () {
         expect(list.array).toEqual(expected)
     });
 })
-// describe("AList retainAll", function () {
-//     it("do not work without array in arg", function () {
-//         var list = new AList()
-//         list.add(1)
-//         list.add(2)
-//         list.add(3)
-//         list.add(4)
-//         var expected = [3, 4, 1, 2]
-//         list.halfReverse()
-//         expect(list.array).toEqual(expected)
-//     });
-// })
-// describe("AList removeAll", function () {
-//     it("do not work without array in arg", function () {
-//         var list = new AList()
-//         list.add(1)
-//         list.add(2)
-//         list.add(3)
-//         list.add(4)
-//         var expected = [3, 4, 1, 2]
-//         list.halfReverse()
-//         expect(list.array).toEqual(expected)
-//     });
-// })
+describe("AList retainAll", function () {
+    it("work", function () {
+        var list = new AList()
+        list.add(1)
+        list.add(2)
+        list.add(3)
+        list.add(4)
+        list.retainAll([2, 3])
+        var expected = [undefined,2, 3, undefined]
+        expect(list.array).toEqual(expected)
+    });
+})
+describe("AList removeAll", function () {
+    it("work", function () {
+        var list = new AList()
+        list.add(1)
+        list.add(2)
+        list.add(3)
+        list.add(4)
+        list.removeAll([2, 3])
+        var expected = [1,undefined, undefined, 4]
+        expect(list.array).toEqual(expected)
+    });
+})
 describe("AList sort", function () {
-    it("do not work without array in arg", function () {
+    it("work", function () {
         var list = new AList()
         list.add(1)
         list.add(4)

@@ -192,22 +192,39 @@ AList.prototype.halfReverse = function(){
         this.array = swapArray
     }
 }
-// AList.prototype.retainAll = function(array){
-//     if(Array.isArray(array)){
-//         var initArr = this.toArray()
-//         for(var i = 0; i < initArr.length; i++){
-
-//         }
-//     }else return 'put array in agruments'
-// }
-// AList.prototype.removeAll = function(array){
-//     if(Array.isArray(array)){
-//         var initArr = this.toArray()
-//         for(var i = 0; i < initArr.length; i++){
-
-//         }
-//     }else return 'put array in agruments'
-// }
+AList.prototype.retainAll = function(array){
+    if(Array.isArray(array)){
+        this.array = this.toArray()
+        for (var i = 0; i < this.array.length; i++) {
+            var contains = false;
+            for (var j = 0; j < array.length; j++) {
+                if (this.array[i] === array[j]) {
+                    contains = true;
+                    break;
+                }
+            }
+            if (!contains) {
+                this.array[i] = undefined;
+                this.size--;
+            }
+        }
+        return this.array;
+    }else return 'put array in agruments'
+}
+AList.prototype.removeAll = function(array){
+    if(Array.isArray(array)){
+        this.array = this.toArray()
+        for (var i = 0; i < this.array.length; i++) {
+    for (var j = 0; j < array.length; j++) {
+        if (this.array[i] === array[j]) {
+            this.array[i] = undefined;
+            this.size--;
+        }
+    }
+}
+    return this.array;
+    }else return 'put array in agruments'
+}
 
 AList.prototype.sort = function(){
     var array = this.toArray()

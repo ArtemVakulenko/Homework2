@@ -64,18 +64,18 @@ describe("LList remove", function () {
     });
 });
 describe("LList set", function () {
-    // it("set in middle", function () {
-    //     var list = new LList();
-    //     list.add(10);
-    //     list.add(20);
-    //     list.add(-30);
-    //     list.add(50);
-    //     list.add(200);
-    //     list.set(42, 3)
-    //     var expectedArray = [10, 20, -30, 42, 200];
-    //     console.log(list.toArray());
-    //     expect(list.toArray()).toEqual(expectedArray);
-    // });
+    it("set in middle", function () {
+        var list = new LList();
+        list.add(10);
+        list.add(20);
+        list.add(-30);
+        list.add(50);
+        list.add(200);
+        list.set(42, 3)
+        var expectedArray = [10, 20, -30, 42, 200];
+        console.log(list.toArray());
+        expect(list.toArray()).toEqual(expectedArray);
+    });
     it("set first", function () {
         var list = new LList();
         list.set(42, 0)
