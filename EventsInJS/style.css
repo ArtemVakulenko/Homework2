@@ -1,0 +1,20 @@
+#galleryContainer{
+    width: 1000px;
+}
+#mainImage{
+    height: 500px;
+}
+
+.smallImg{
+    height: 80px;
+}
+#imgContainer{
+    height: 85px;
+    overflow: scroll;
+}
+#currentSlideShowImg{
+    height: 500px;
+}
+.hide{
+    display: none;
+}
