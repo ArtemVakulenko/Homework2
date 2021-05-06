@@ -1,12 +1,12 @@
-var p = 5
+var p = 3
 var q = 7
 var module = p * q
 var euler = (p - 1) * (q - 1)
-// var e = 5
-var e = getE()
-// var d = 17
+var e = 5
+// var e = getE()
+var d = 17
 // var dLimit = 100
-var d = getD()
+// var d = getD()
 
 
 function getE (){
@@ -74,8 +74,7 @@ var decMessage = (Math.pow(encMessage, myClosedKey.d)) % myClosedKey.module
 console.log('euler' , euler, 'module', module)
 console.log('e', e, 'd', d);
 console.log(myOpenkey, myClosedKey);
-console.log( message, encMessage, decMessage);
+console.log(message, encMessage, decMessage);
 
 
 // console.log(isPrime(71));
-

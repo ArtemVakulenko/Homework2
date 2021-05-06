@@ -28,34 +28,35 @@ var clearButton =  document.getElementById('clearButton')
 
 var winnerText =  document.getElementById('winner')
 
-function getRandom1to10(){
-	return Math.floor (Math.random() * 10)
+function getRandomNum(min, max){
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 generateNameBtn.addEventListener('click', function(){
-    nameInput.value = nameArray[getRandom1to10()]
+    nameInput.value = nameArray[getRandomNum(0, 9)]
 })
 generateBalanceBtn.addEventListener('click', function(){
-    balanceInput.value = balanceArray[getRandom1to10()]
+    balanceInput.value = balanceArray[getRandomNum(0, 9)]
 })
 generateAgeBtn.addEventListener('click', function(){
-    ageInput.value = ageArray[getRandom1to10()]
+    ageInput.value = ageArray[getRandomNum(0, 9)]
 })
 generateDocumentBtn.addEventListener('click', function(){
-    documentInput.value = docArray[getRandom1to10()]
+    documentInput.value = docArray[getRandomNum(0, 9)]
 })
 generateEnglishBtn.addEventListener('click', function(){
-    engInput.value = engArray[getRandom1to10()]
+    engInput.value = engArray[getRandomNum(0, 9)]
 })
 
 generateAllButton.addEventListener('click', function(){
-    nameInput.value = nameArray[getRandom1to10()]
-    balanceInput.value = balanceArray[getRandom1to10()]
-    ageInput.value = ageArray[getRandom1to10()]
-    documentInput.value = docArray[getRandom1to10()]
-    engInput.value = engArray[getRandom1to10()]
+    nameInput.value = nameArray[getRandomNum(0, 9)]
+    balanceInput.value = balanceArray[getRandomNum(0, 9)]
+    ageInput.value = ageArray[getRandomNum(0, 9)]
+    documentInput.value = docArray[getRandomNum(0, 9)]
+    engInput.value = engArray[getRandomNum(0, 9)]
 })
 
-var candidates = []
+var candidatesForShow = []
+var candidatesForRace = []
 
 function Candidate(name, balance, age, docs, eng){
     this.name = name
@@ -68,24 +69,37 @@ addCandidateButton.addEventListener('click', function(){
     if(!nameInput.value) {
         errorText.innerHTML = 'no name'
     }else{
-        //сюда нужна ещё функция проверки имени на пустоту
-        var cand = new Candidate(
+        var candForRace = new Candidate(
             nameInput.value, 
             checkBalance(balanceInput.value),
             checkAge(ageInput.value), 
             checkDocs(documentInput.value), 
             checkEng(engInput.value)
             )
-        candidates.push(cand)
-        console.log(candidates);
-        if(candidates.length === 5){
+            candidatesForRace.push(candForRace)
+
+        var candForShow = new Candidate(
+            nameInput.value, 
+            balanceInput.value,
+            ageInput.value, 
+            documentInput.value, 
+            engInput.value
+            )
+        candidatesForShow.push(candForShow)
+
+        console.log(candidatesForShow, candidatesForRace);
+        if(candidatesForShow.length === 5){
             addCandidateButton.disabled = 'true'
         }
     }
 })
 function checkBalance(num){
-    if(num > 2000) return true
-    else return false
+    var res = false
+    if(num > 2000) {
+        res = true
+    }
+    return res
+    
 }
 function checkAge(num){
     if(num > 18 && num < 60) return true
@@ -103,22 +117,35 @@ function checkEng(str){
     if(str = 'false') return true
 }
 
+//проверка денег от 5 до 10 секунд 
+//проверка возраста от 1 до 3 секунд 
+//проверка документов от 10 до 20 секунд 
+//проверка англ от 5 до 20 секунд 
+
+raceButton.addEventListener('click', function(){
+    // //функция запускает гонку кандидатов
+    // startPromiceRace(candidatesForRace)
+    race(candidatesForShow[0])
+})
+
+// function startPromiceRace(array){
+    
+// }
+
+// var firstCandCheck = new Promise(function(resolve, reject){
+//     var timeMoneyCheck = getRandomNum(5, 10) * 1000
+//     setTimeout(function() {
+
+//     }, timeMoneyCheck)
+// })
+    
 
 initButton.addEventListener('click', function(){
     //функция показа всех кандидатов
 })
-
-
-raceButton.addEventListener('click', function(){
-    //функция запускает гонку кандидатов
-    startPromiceRace(candidates)
-})
-
-function startPromiceRace(array){
-
-}
 //убрать задизейбливание кнопки add после нажания та clear
 clearButton.addEventListener('click', function(){
     candidates = []
     console.log(candidates);
+    // addCandidateButton.disabled = 'false'
 })
