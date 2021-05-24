@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PainerOnCanvas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="controls">
+        <div class="colors">
+          <button type="button" value="#FF0000"></button>
+          <button type="button" value="#00FF00"></button>
+          <button type="button" value="#0000FF"></button>
+          <button type="button" value="#FFFF00"></button>
+          <button type="button" value="#000000"></button>
+        </div>
+        <div>
+            <input type="range" id="thickness" name="volume"
+            min="1" max="15">
+            <label for="thickness">Brush thickness</label>
+        </div>
+        <div class="buttons">
+          <button id="clear" type="button">Clear</button>
+          <button id="save" type="button">Save</button>
+        </div>
+      </div>
+      <div id="canvasSpace">
+        <canvas id="canvas" width="640" height="400"></canvas>
+      </div>
+      <script src="./script.js"></script>
+</body>
+</html>
