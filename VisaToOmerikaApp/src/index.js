@@ -1,3 +1,5 @@
+//#region vars
+
 var nameArray = ['1', '2', '3', '4','5', '6', '7', '8', '9', '10',]
 var balanceArray = [7000, 7000, 7000, 7000, 7000, 7000, 1000, 1000, 1000, 1000]
 var ageArray = [20, 20, 20, 20, 20, 20, 20, 70, 70, 70]
@@ -27,6 +29,8 @@ var raceButton =  document.getElementById('raceButton')
 var clearButton =  document.getElementById('clearButton')
 
 var winnerText =  document.getElementById('winner')
+
+//#endregion
 
 function getRandomNum(min, max){
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -68,6 +72,7 @@ function Candidate(name, balance, age, docs, eng){
 addCandidateButton.addEventListener('click', function(){
     if(!nameInput.value) {
         errorText.innerHTML = 'no name'
+        //тут остальные проверки и сообщения
     }else{
         var candForRace = new Candidate(
             nameInput.value, 
@@ -88,6 +93,7 @@ addCandidateButton.addEventListener('click', function(){
         candidatesForShow.push(candForShow)
 
         console.log(candidatesForShow, candidatesForRace);
+        
         if(candidatesForShow.length === 5){
             addCandidateButton.disabled = 'true'
         }
@@ -145,14 +151,15 @@ raceButton.addEventListener('click', function(){
 })
 //запускает промисы для кандидатов
 function startPromiceRace(){
-    Promise.all([promise11(), promise21(), promise31(), promise41(), promise51()])
+    // Promise.race([promise11(), promise21(), promise31(), promise41(), promise51()])
+    Promise.any(promise11())
     .then(
         function (){
-            console.log('first cand finished is ok');
+            console.log('кто-то победил');
         }
         ,
         function (){
-            console.log('first cand finished is bad ');
+            console.log('никто не победил');
         }
     )
 }
@@ -429,5 +436,5 @@ initButton.addEventListener('click', function(){
 clearButton.addEventListener('click', function(){
     candidates = []
     console.log(candidates);
-    // addCandidateButton.disabled = 'false'
+    addCandidateButton.disabled = 'false'
 })
