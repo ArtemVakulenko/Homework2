@@ -62,24 +62,63 @@ LList.prototype.remove = function (value) {
         }
     }
 };
-LList.prototype.set = function (value, index){
-    var newNode = this.Node(value)
+
+LList.prototype.set = function (value, index) {
+    var newNode = new this.Node(value)
     if(index === 0){
         this.root = newNode
         return
+            }
+    if (typeof value !== "number" || typeof index !== "number") {
+      return "value and index must be only numbers"
     }
-    if(index > this.size){
-        return 'NO'
+    if (index > this.size) {
+      return "invalid index"
     }
-    var indexCount = 0
-    var currentNode = this.root
-    while(currentNode.next !== null){
-        currentNode = currentNode.next
-        indexCount++
-        if(indexCount === index){
-            currentNode = newNode
-            break
+    var tempNode = this.root
+    var count = 0
+    while (count !== index) {
+      tempNode = tempNode.next
+      count++
+    }
+    tempNode.value = value
+};
+
+LList.prototype.get = function (index) {
+    if (index > this.size) {
+        return "invalid index"
+    }
+    var tempNode = this.root
+    var count  = 0
+    while (tempNode !== null){
+        if(count === index){
+            return tempNode.value
         }
+        tempNode = tempNode.next
+        count++
     }
-}
+};
+
+LList.prototype.remove = function (value) {
+    if (typeof value !== "number" || arguments.length > 1) {
+      return "work only with one number argument"
+    }
+    var tempNode = this.root;
+    var prevNode = null;
+    while (tempNode !== null) {
+      if (tempNode.value === value) {
+        if (prevNode === null) {
+          this.root = tempNode.next;
+        } else {
+          prevNode.next = tempNode.next;
+        }
+        this.size--;
+        return tempNode.value;
+      } else {
+        prevNode = tempNode;
+        tempNode = tempNode.next;
+      }
+    }
+  };
+
 module.exports = LList;

@@ -21,10 +21,7 @@ describe("AList check init capacity", function () {
 describe("AList add", function () {
     it("add first", function () {
         var list = new AList();
-        // console.log("size = ", list.getSize());
         list.add(10);
-        // console.log("size = ", list.getSize());
-        // console.log(list.array);
         var expected = [10, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined];
         expect(list.array).toEqual(expected);
         expect(list.getSize()).toBe(1);
@@ -47,7 +44,6 @@ describe("AList set", function () {
         list.add(5);
         list.add(3);
         list.set(50, 5);
-        // console.log(list.array);
         expect(list.array.length).toBe(10)
         expect(list.getSize()).toBe(4)
         expect(list.array[4]).toBe(undefined)
@@ -128,7 +124,6 @@ describe("AList toArray", function () {
         list.add(13)
         list.add(15)
         list.set(42, 7)
-        // console.log(list.array);
         var expected = [10, 11, 12, 13, 15, 42]
         expect(list.toArray()).toEqual(expected)
     });
@@ -141,7 +136,6 @@ describe("AList toString", function () {
         list.add(3)
         list.add(4)
         list.toString()
-        // list.toArray() = jest.fn()
         expect(typeof list.toString()).toBe('string')
     });
 })
@@ -198,18 +192,18 @@ describe("AList maxValue", function () {
         expect(list.maxValue()).toBe(90)
     });
 })
-// describe("AList maxIndex", function () {
-//     it("return max index if such is present", function () {
-//         var ARRAY = [1, -2, 3, 52 , -60, 90, 42];
-//         var list = new AList(ARRAY);
-//         expect(list.minIndex()).toBe(5)
-//     });
-//     it("return first max Index if such is present twice", function () {
-//         var ARRAY = [1, -2, 3, 52, 90, -60, 90, -60, 42];
-//         var list = new AList(ARRAY);
-//         expect(list.minIndex()).toBe(4)
-//     });
-// })
+describe("AList maxIndex", function () {
+    it("return max index if such is present", function () {
+        var ARRAY = [1, -2, 3, 52 , -60, 90, 42];
+        var list = new AList(ARRAY);
+        expect(list.maxIndex()).toBe(5)
+    });
+    it("return first max Index if such is present twice", function () {
+        var ARRAY = [1, -2, 3, 52, 90, -60, 90, -60, 42];
+        var list = new AList(ARRAY);
+        expect(list.maxIndex()).toBe(4)
+    });
+})
 describe("AList minIndex", function () {
     it("return min index if such is present", function () {
         var ARRAY = [1, -2, 3, 52 , -60, 90, 42];
@@ -231,9 +225,7 @@ describe("AList reverse", function () {
         list.add(4)
         list.add(7)
         list.set(42, 7)
-        // console.log(list.array);
         list.reverse()
-        // console.log(list.array);
         var expected = [undefined, undefined, 42, undefined, undefined, 7,4, 3, 2, 1]
         expect(list.array).toEqual(expected)
     });
@@ -324,6 +316,6 @@ describe("AList print", function () {
         list.add(4)
         list.add(3)
         list.add(2)
-        list.print()
+        // list.print()
     });
 })

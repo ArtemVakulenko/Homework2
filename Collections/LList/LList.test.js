@@ -80,7 +80,52 @@ describe("LList set", function () {
         var list = new LList();
         list.set(42, 0)
         var expectedArray = [42,];
-        console.log(list.toArray());
+        // console.log(list.toArray());
         expect(list.toArray()).toEqual(expectedArray);
+    });
+    it("set out of range", function () {
+        var list = new LList();
+        
+        expect(list.set(42, 2)).toBe("invalid index");
+    });
+});
+describe("LList get", function () {
+    it("get first", function () {
+        var list = new LList();
+        list.add(10);
+        list.add(20);
+        list.add(-30);
+        list.add(50);
+        list.add(200);
+        expect(list.get(0)).toBe(10);
+    });
+    it("get any", function () {
+        var list = new LList();
+        list.add(10);
+        list.add(20);
+        list.add(-30);
+        list.add(50);
+        list.add(200);
+        expect(list.get(3)).toBe(50);
+    });
+    it("get non-existent", function () {
+        var list = new LList();
+        list.add(10);
+        list.add(20);
+        list.add(-30);
+        list.add(50);
+        list.add(200);
+        expect(list.get(51)).toBe("invalid index");
+    });
+});
+describe("LList get", function () {
+    it("get first", function () {
+        var list = new LList();
+        list.add(10);
+        list.add(20);
+        list.add(-30);
+        list.add(50);
+        list.add(200);
+        expect(list.get(0)).toBe(10);
     });
 });
