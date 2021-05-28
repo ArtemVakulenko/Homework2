@@ -1,6 +1,6 @@
 //#region vars
 
-var nameArray = ['1', '2', '3', '4','5', '6', '7', '8', '9', '10',]
+var nameArray = ['Barack Obama', 'Donald Trump', 'qwetry', 'ytrewq','asdasd', 'zxcvbn', 'dsadsa', 'ojdvbpa', 'vdubpavadg', 'gsdgasdah',]
 var balanceArray = [7000, 7000, 7000, 7000, 7000, 7000, 1000, 1000, 1000, 1000]
 var ageArray = [20, 20, 20, 20, 20, 20, 20, 70, 70, 70]
 var docArray = [true, true, true, true, true, true, true, true, false, false]
@@ -137,7 +137,7 @@ function addCandidate(){
             engInput.value
             )
         candidatesForShow.push(candForShow)
-        
+        console.log(candidatesForShow, candidatesForRace);
         if(candidatesForShow.length === 5){
             addCandidateButton.disabled = 'true'
         }
@@ -155,29 +155,43 @@ raceButton.addEventListener('click', function(){
 
 //запускает промисы для кандидатов
 function startPromiceRace(){
-    Promise.any(oneCandidateRace)
+    const oneCandidateRace = promiseTemplate(
+        candidatesForRace[0],
+        candidatesForRace[0].balance,
+        getRandomNum(1, 2)
+        ).then(function(cand) {
+                Promise.all(
+                promiseTemplate(cand,
+                    cand.age,
+                    getRandomNum(1, 2)),
+                promiseTemplate(cand,
+                    cand.docs,
+                    getRandomNum(1, 2)),
+                promiseTemplate(cand,
+                    cand.eng,
+                    getRandomNum(1, 2)))
+                    .then((cand)=>{
+                        console.log(cand.name, "win");
+                    }).catch((err, cand)=>{
+                        if(err){
+                            console.log(err);
+                        }
+                        console.log(cand.name, "lose");
+                    })
+            }
+        ).then(function(cand){
+            console.log(cand.name);
+    }).catch((err, cand)=>{
+        if(err){
+            console.log(err);
+        }
+        console.log(cand.name);
+    })
+    return oneCandidateRace
 }
 
 //заготовка для одного кандидата
-const oneCandidateRace = promiseTemplate(
-    candidatesForRace[0],
-    candidatesForRace[0].balance,
-    getRandomNum(1, 2)
-    ).then(function(cand) {
-            Promise.all(
-            promiseTemplate(cand,
-                cand.age,
-                getRandomNum(1, 2)),
-            promiseTemplate(cand,
-                cand.docs,
-                getRandomNum(1, 2)),
-            promiseTemplate(cand,
-                cand.eng,
-                getRandomNum(1, 2)),)
-        }
-    ).then(function(cand){
-        console.log(cand.name);
-    })
+
 
 initButton.addEventListener('click', function(){
     //функция показа всех кандидатов
