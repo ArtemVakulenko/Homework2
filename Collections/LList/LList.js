@@ -101,7 +101,7 @@ LList.prototype.get = function (index) {
 
 LList.prototype.remove = function (value) {
     if (typeof value !== "number" || arguments.length > 1) {
-      return "work only with one number argument"
+      return false;
     }
     var tempNode = this.root;
     var prevNode = null;
@@ -119,6 +119,109 @@ LList.prototype.remove = function (value) {
         tempNode = tempNode.next;
       }
     }
-  };
+};
+  
+LList.prototype.toString = function () {
+    if (this.size === 0) {
+      return "";
+    }
+    var string = "";
+    var tempNode = this.root;
+    while (tempNode !== null) {
+      string += tempNode.value;
+      if (tempNode.next === null) {
+        break;
+      }
+      string += ",";
+      tempNode = tempNode.next;
+    }
+    return string;
+};
+
+LList.prototype.contains = function (value) {
+    var tempNode = this.root;
+    while (tempNode !== null) {
+      if (tempNode.value === value) {
+        return true;
+      }
+      tempNode = tempNode.next;
+    }
+    return false;
+};
+
+LList.prototype.minValue = function () {
+    if (this.size === 0) {
+      return -1;
+    }
+    var tempNode = this.root;
+    var minValue = this.root.value;
+    while (tempNode !== null) {
+      if (minValue > tempNode.value) {
+        minValue = tempNode.value;
+      }
+      tempNode = tempNode.next;
+    }
+    return minValue;
+};
+
+LList.prototype.maxValue = function () {
+    if (this.size === 0) {
+      return -1;
+    }
+    var tempNode = this.root;
+    var maxValue = this.root.value;
+    while (tempNode !== null) {
+      if (maxValue < tempNode.value) {
+        maxValue = tempNode.value;
+      }
+      tempNode = tempNode.next;
+    }
+    return maxValue;
+};
+
+LList.prototype.minIndex = function () {
+    if (this.size === 0) {
+      return -1;
+    }
+    var tempNode = this.root;
+    var minValue = this.root.value;
+    var index = 0;
+    var count = 0;
+    while (tempNode !== null) {
+      if (minValue > tempNode.value) {
+        index = count;
+        minValue = tempNode.value;
+      }
+      tempNode = tempNode.next;
+      count++;
+    }
+    return index;
+};
+
+LList.prototype.maxIndex = function () {
+    if (this.size === 0) {
+      return -1;
+    }
+    var tempNode = this.root;
+    var minValue = this.root.value;
+    var index = 0;
+    var count = 0;
+    while (tempNode !== null) {
+      if (minValue < tempNode.value) {
+        index = count;
+        minValue = tempNode.value;
+      }
+      tempNode = tempNode.next;
+      count++;
+    }
+    return index;
+};
+
+LList.prototype.reverse = function () {
+    if (this.root === null) {
+      return;
+    }
+    this.root = this.__reverseList(this.root);
+};
 
 module.exports = LList;
