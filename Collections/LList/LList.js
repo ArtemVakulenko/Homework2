@@ -41,27 +41,6 @@ LList.prototype.toArray = function () {
     }
     return array;
 };
-LList.prototype.remove = function (value) {
-    if (this.root === null) {
-        return;
-    }
-    var tempNode = this.root;
-    var prevNode = null
-    while (tempNode !== null) {
-        if (tempNode.value === value) {
-            if(prevNode === null){
-                this.root = tempNode.next
-            }else {
-                prevNode.next = tempNode.next
-            }
-            this.size--
-            return tempNode.value
-        }else {
-            prevNode = tempNode
-            tempNode = tempNode.next
-        }
-    }
-};
 
 LList.prototype.set = function (value, index) {
     var newNode = new this.Node(value)
